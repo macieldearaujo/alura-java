@@ -8,7 +8,7 @@ import java.util.Date;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record DadosEpisodio(@JsonAlias("Title") String title,
                             @JsonAlias("Episode") Integer episode,
-                            @JsonAlias("imdbRating") Double rating,
+                            @JsonAlias("imdbRating") String avaliacao,
                             @JsonAlias("Released") String dataLancamento
                             ) {
 }
