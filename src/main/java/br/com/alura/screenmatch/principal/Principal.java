@@ -68,20 +68,26 @@ public class Principal {
 //                "Temporada: " + e.getNumeroTemporada() + " - Título: " + e.getTitulo() + ", Data de lançamento: " +  df.format(e.getDataLancamento())
 //        ));
 
-        System.out.println("Digite um trecho do título do episódio:");
-        String trecho = sc.nextLine();
+//        System.out.println("Digite um trecho do título do episódio:");
+//        String trecho = sc.nextLine();
+//
+//        Optional<Episodio> episodioFiltrado = episodios.stream().filter(e -> e.getTitulo().toUpperCase().contains(trecho.toUpperCase()))
+//                .findFirst();
+//
+//        if(episodioFiltrado.isEmpty()) {
+//            System.out.println("Episódio não encontrado");
+//        } else {
+//            System.out.println("Episódio encontrado: \nTítulo: do episódio: "
+//                    + episodioFiltrado.get().getTitulo()
+//                    + " - Temporada: " + episodioFiltrado.get().getNumeroTemporada());
+//        }
 
-        Optional<Episodio> episodioFiltrado = episodios.stream().filter(e -> e.getTitulo().toUpperCase().contains(trecho.toUpperCase()))
-                .findFirst();
+        Map<Integer, Double> avaliacaoPorTemporada = episodios.stream()
+                .filter(t -> t.getAvaliacao() > 0.0)
+                .collect(Collectors.groupingBy(Episodio::getNumeroTemporada
+                        ,Collectors.averagingDouble(Episodio :: getAvaliacao)));
 
-        if(episodioFiltrado.isEmpty()) {
-            System.out.println("Episódio não encontrado");
-        } else {
-            System.out.println("Episódio encontrado: \nTítulo: do episódio: "
-                    + episodioFiltrado.get().getTitulo()
-                    + " - Temporada: " + episodioFiltrado.get().getNumeroTemporada());
-        }
-
+        System.out.println(avaliacaoPorTemporada);
 //        List<String> nomesDosEpisodios = new ArrayList<>();
 //        for(DadosTemporada temp : temporadas) {
 //            for(DadosEpisodio ep : temp.episodios()) {
