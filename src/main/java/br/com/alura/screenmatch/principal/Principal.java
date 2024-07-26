@@ -6,7 +6,10 @@ import br.com.alura.screenmatch.model.DadosSerie;
 import br.com.alura.screenmatch.model.DadosTemporada;
 import br.com.alura.screenmatch.service.ConsumoApi;
 import br.com.alura.screenmatch.service.ConverteDados;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -24,6 +27,7 @@ public class Principal {
     public void exibirMenu() {
         System.out.println("Digite o nome da série:");
         String nomeSerie = sc.nextLine();
+
         String nomeSerieUrl = nomeSerie.replace(" ", "+");
 
         String json = consumo.obterDados(ENDERECO + nomeSerie.replace(" ", "+") + API_KEY);
@@ -54,6 +58,17 @@ public class Principal {
         List<Episodio> episodios = temporadas.stream().flatMap(t -> t.episodios().stream().map(d -> new Episodio(t.numeroTemporada(), d))).toList();
 
         episodios.forEach(System.out::println);
+
+        System.out.println("A partir de qual ano você deseja ver os episódios?");
+        int anoSelecionado = sc.nextInt();
+        LocalDate dataSelecionada = LocalDate.of(anoSelecionado, 1, 1);
+
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        List<Episodio> episodiosFiltrados = episodios.stream()
+                .filter(e -> e.getDataLancamento() != null && e.getDataLancamento().isAfter(dataSelecionada)).toList();
+        episodiosFiltrados.forEach(e -> System.out.println(
+                "Temporada: " + e.getNumeroTemporada() + " - Título: " + e.getTitulo() + ", Data de lançamento: " +  df.format(e.getDataLancamento())
+        ));
 
 //        List<String> nomesDosEpisodios = new ArrayList<>();
 //        for(DadosTemporada temp : temporadas) {
