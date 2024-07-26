@@ -10,10 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Principal {
@@ -60,16 +57,30 @@ public class Principal {
 
         episodios.forEach(System.out::println);
 
-        System.out.println("A partir de qual ano você deseja ver os episódios?");
-        int anoSelecionado = sc.nextInt();
-        LocalDate dataSelecionada = LocalDate.of(anoSelecionado, 1, 1);
+//        System.out.println("A partir de qual ano você deseja ver os episódios?");
+//        int anoSelecionado = sc.nextInt();
+//        LocalDate dataSelecionada = LocalDate.of(anoSelecionado, 1, 1);
+//
+//        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+//        List<Episodio> episodiosFiltrados = episodios.stream()
+//                .filter(e -> e.getDataLancamento() != null && e.getDataLancamento().isAfter(dataSelecionada)).toList();
+//        episodiosFiltrados.forEach(e -> System.out.println(
+//                "Temporada: " + e.getNumeroTemporada() + " - Título: " + e.getTitulo() + ", Data de lançamento: " +  df.format(e.getDataLancamento())
+//        ));
 
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        List<Episodio> episodiosFiltrados = episodios.stream()
-                .filter(e -> e.getDataLancamento() != null && e.getDataLancamento().isAfter(dataSelecionada)).toList();
-        episodiosFiltrados.forEach(e -> System.out.println(
-                "Temporada: " + e.getNumeroTemporada() + " - Título: " + e.getTitulo() + ", Data de lançamento: " +  df.format(e.getDataLancamento())
-        ));
+        System.out.println("Digite um trecho do título do episódio:");
+        String trecho = sc.nextLine();
+
+        Optional<Episodio> episodioFiltrado = episodios.stream().filter(e -> e.getTitulo().toUpperCase().contains(trecho.toUpperCase()))
+                .findFirst();
+
+        if(episodioFiltrado.isEmpty()) {
+            System.out.println("Episódio não encontrado");
+        } else {
+            System.out.println("Episódio encontrado: \nTítulo: do episódio: "
+                    + episodioFiltrado.get().getTitulo()
+                    + " - Temporada: " + episodioFiltrado.get().getNumeroTemporada());
+        }
 
 //        List<String> nomesDosEpisodios = new ArrayList<>();
 //        for(DadosTemporada temp : temporadas) {
