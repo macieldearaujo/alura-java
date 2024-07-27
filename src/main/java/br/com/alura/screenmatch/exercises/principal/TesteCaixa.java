@@ -1,4 +1,4 @@
-package br.com.alura.screenmatch.exercises.application;
+package br.com.alura.screenmatch.exercises.principal;
 
 import br.com.alura.screenmatch.exercises.entities.Caixa;
 

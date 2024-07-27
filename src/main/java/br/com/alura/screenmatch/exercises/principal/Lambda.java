@@ -1,6 +1,5 @@
-package br.com.alura.screenmatch.exercises.application;
+package br.com.alura.screenmatch.exercises.principal;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
