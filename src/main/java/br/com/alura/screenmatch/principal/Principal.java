@@ -31,8 +31,6 @@ public class Principal {
         ConverteDados conversor = new ConverteDados();
         DadosSerie serie = conversor.obterDados(json, DadosSerie.class);
 
-        System.out.println(serie);
-
         List<DadosTemporada> temporadas = new ArrayList<>();
 		for(int i = 1; i <= serie.totalTemporadas(); i++) {
 			json = consumo.obterDados("https://www.omdbapi.com/?t=" + nomeSerieUrl +"&season=" + i + "&apikey=6585022c");
