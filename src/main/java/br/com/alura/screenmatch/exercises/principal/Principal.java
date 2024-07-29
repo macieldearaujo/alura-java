@@ -30,5 +30,12 @@ public class Principal {
         ConverteDados conversor = new ConverteDados();
         List<DadosModelo> marcas = conversor.obterListaDados(json, DadosModelo.class);
         System.out.println(marcas);
+
+        System.out.println("Informe o código da marca para consulta:");
+        var modeloSelecionado = sc.nextLine();
+        json += modeloSelecionado + "/modelos";
+        List<DadosModelo> modelos = conversor.obterListaDados(json, DadosModelo.class);
+        System.out.println(modelos);
+
     }
 }
