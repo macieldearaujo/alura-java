@@ -1,4 +1,4 @@
-package br.com.alura.screenmatch.exercises.entities;
+package br.com.alura.screenmatch.exercises.model;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
