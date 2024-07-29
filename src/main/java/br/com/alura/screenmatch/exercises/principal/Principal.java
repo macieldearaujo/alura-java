@@ -42,13 +42,27 @@ public class Principal {
         var marcaSelecionada = sc.nextLine();
         json = consumo.obterDados(URL_PADRAO + veiculoSelecionado + "/marcas/" + marcaSelecionada + "/modelos/");
         DadosVeiculo opcoesModelos = conversor.obterDados(json, DadosVeiculo.class);
-        System.out.println(opcoesModelos);
+
         List<Veiculo> modelos = opcoesModelos.modelos().stream()
-                .map(m -> new Veiculo(m.codigo(), m.descricao())).toList();
-        List<Veiculo> anos = opcoesModelos.anos().stream()
-                .map(m -> new Veiculo(m.codigo(), m.descricao())).toList();
+                .sorted(Comparator.comparing(DadosModelo::codigo))
+                .map(m -> new Veiculo(m.codigo(), m.descricao()))
+                .toList();
         modelos.forEach(System.out::println);
-        anos.forEach(System.out::println);
+
+        System.out.println("Digite um trecho do nome do veículo para consulta:");
+        var trechoSelecionado = sc.nextLine();
+
+        List<Veiculo> opcoesVeiculos = modelos.stream()
+                .filter(v -> v.getDescricao().toUpperCase()
+                .contains(trechoSelecionado.toUpperCase()))
+                .toList();
+        opcoesVeiculos.stream().limit(10).forEach(System.out::println);
+
+//        List<Veiculo> anos = opcoesModelos.anos().stream()
+//                .sorted(Comparator.comparing(DadosModelo::codigo))
+//                .map(m -> new Veiculo(m.codigo(), m.descricao()))
+//                .toList();
+////        anos.forEach(System.out::println);
 
 //        System.out.println("Digite um trecho do nome do veículo para consulta:");
 
