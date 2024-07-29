@@ -1,19 +1,19 @@
 package br.com.alura.screenmatch.exercises.entities;
 
-public class Marca {
-    private Integer codigo;
+public class Veiculo {
+    private String codigo;
     private String descricao;
 
-    public Marca(Integer codigo, String descricao) {
+    public Veiculo(String codigo, String descricao) {
         this.codigo = codigo;
         this.descricao = descricao;
     }
 
-    public Integer getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(Integer codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 
