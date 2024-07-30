@@ -1,6 +1,6 @@
 package br.com.alura.screenmatch.exercises.principal;
 
-import br.com.alura.screenmatch.exercises.entities.Caixa;
+import br.com.alura.screenmatch.exercises.model.Caixa;
 
 public class TesteCaixa {
     public static void main(String[] args) {

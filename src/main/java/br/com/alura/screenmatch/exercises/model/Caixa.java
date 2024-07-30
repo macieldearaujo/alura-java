@@ -1,4 +1,4 @@
-package br.com.alura.screenmatch.exercises.entities;
+package br.com.alura.screenmatch.exercises.model;
 
 public class Caixa<T> {
     private T conteudo;
